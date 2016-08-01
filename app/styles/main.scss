@@ -1,0 +1,85 @@
+.row {
+  margin-bottom: 20px;
+}
+
+section, header {
+  background-color: #fff;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 200px;
+}
+
+.footer {
+  position: absolute;
+  padding: 20px 0;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 200px;
+  color: #efefef;
+  background-color: #333;
+}
+
+.footer a {
+  color: #9af7fe;
+}
+
+/* Page header
+-------------------------------------------------- */
+.page-header {
+  padding-top: 10px;
+  padding-left: 15px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: whitesmoke;
+  background-color: steelblue;
+  border-radius: 5px;
+  /*box-shadow: 3px 3px 2px #888888;*/
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-weight: 600;
+}
+
+/* Miscellaneous stuff
+-------------------------------------------------- */
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
+div.row {
+  margin-bottom: 10px;
+}
+
+.color-firebrick {
+  color: firebrick;
+}
+
+.justify-text {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* Generic copyright notice.
+//-------------------------------------------------- */
+.copyright {
+  color: darkgray;
+  font-size: small;
+  padding-top: 10px;
+  margin-top: 25px;
+  border-top: 1px solid darkgray;
+}
+
+/* Center text.
+//-------------------------------------------------- */
+.text-center {
+  text-align: center;
+}
