@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'annotatorjs',
+    modulePrefix: 'annotatorjs-demo',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
