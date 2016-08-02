@@ -2,8 +2,14 @@
 <p class="lead"><strong>{{model.title}}</strong> - <small>{{model.author}}</small></p>
 
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-6">
         <p>{{model.text}}</p>
         {{!annotate-it topic=model}}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        {{#link-to 'topics'}}Topics{{/link-to}}
     </div>
 </div>
