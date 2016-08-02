@@ -1,0 +1,36 @@
+<h2>Topics</h2>
+
+<p class="lead">List of topics</p>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="row table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                    </tr>
+                </thead>
+                <tbody class="hover-cursor">
+                    {{#each model as |topic|}}
+                        <tr>
+                            <td>
+                                {{topic.id}}
+                            </td>
+                            <td>
+                                {{#link-to 'topic' topic}}
+                                    {{topic.title}}
+                                {{/link-to}}
+                            </td>
+                            <td>
+                                {{topic.author}}
+                            </td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

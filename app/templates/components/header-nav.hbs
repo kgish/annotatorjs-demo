@@ -2,7 +2,7 @@
     <nav class='container' role='navigation'>
         <div class='navbar-header'>
           {{#link-to 'index' class='navbar-brand'}}
-              <span class="whitespace-nowrap">{{fa-icon 'home'}} ANNOTATOR.JS DEMO</span>
+              <span class="whitespace-nowrap">{{fa-icon 'home'}} Annotator Demo</span>
           {{/link-to}}
             <button class='navbar-toggle collapsed' data-toggle='collapse' data-target='.navbar-collapse'>
                 <span class='sr-only'>Toggle navigation</span>
@@ -13,6 +13,7 @@
         </div>
 
         <ul class='nav navbar-nav navbar-left collapse navbar-collapse'>
+          {{#active-link tagName='li'}}{{#link-to 'topics'}}{{fa-icon 'star'}}&nbsp; Topics{{/link-to}}{{/active-link}}
         </ul>
 
         <ul class='nav navbar-nav navbar-right collapse navbar-collapse'>

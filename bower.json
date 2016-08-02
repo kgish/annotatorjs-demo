@@ -6,6 +6,8 @@
     "ember-cli-test-loader": "0.2.2",
     "ember-qunit-notifications": "0.1.0",
     "bootstrap": "^3.3.7",
-    "font-awesome": "~4.5.0"
+    "annotator": "https://github.com/openannotation/annotator.git#v1.2.10",
+    "pretender": "~1.1.0",
+    "Faker": "~3.1.0"
   }
 }
