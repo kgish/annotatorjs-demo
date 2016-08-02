@@ -3,7 +3,9 @@
 
 <div class="row">
     <div class="col-sm-6">
-        <p>{{model.text}}</p>
+        {{#each paragraphs as |paragraph|}}
+            <p>{{paragraph}}</p>
+        {{/each}}
         {{!annotate-it topic=model}}
     </div>
 </div>
