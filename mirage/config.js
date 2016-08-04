@@ -1,6 +1,7 @@
 export default function() {
 
-    this.namespace = 'api/v1';
+    this.passthrough('http://localhost:3000/**');
+    this.passthrough('http://annotateit.org/**');
 
     this.get('/topics', (schema/*, request*/) => {
         return schema.topics.all();

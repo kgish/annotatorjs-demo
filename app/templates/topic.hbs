@@ -1,12 +1,12 @@
 <h2>Topic # {{model.id}}</h2>
-<p class="lead"><strong>{{model.title}}</strong> - <small>{{model.author}}</small></p>
+<p class="lead"><strong>{{model.title}}</strong><br /> - <small>{{model.author}}</small></p>
 
 <div class="row">
-    <div class="col-sm-6">
+    <div id="topic-{{model.id}}" class="col-sm-6">
         {{#each paragraphs as |paragraph|}}
             <p>{{paragraph}}</p>
         {{/each}}
-        {{!annotate-it topic=model}}
+        {{annotate-it topic=model}}
     </div>
 </div>
 
