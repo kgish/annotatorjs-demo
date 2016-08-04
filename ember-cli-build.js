@@ -20,6 +20,7 @@ module.exports = function(defaults) {
   // Annotator: http://www.thegreatcodeadventure.com/using-annotator-js-with-ember
   app.import('bower_components/annotator/pkg/annotator-full.min.js');
   app.import('bower_components/annotator/pkg/annotator.css');
+  app.import('vendor/js/annotator-discourse.js');
 
   return app.toTree();
 };

@@ -8,25 +8,63 @@ export default Ember.Component.extend({
 
     didInsertElement: function() {
         var topic_id = this.topic.id,
-            sel = '#topic-'+topic_id;
-        Ember.$(sel).annotator().annotator('addPlugin',
-            'Store', {
-                // prefix: 'http://annotateit.org/api',
-                prefix: 'http://localhost:3000',
-                urls: {
-                    // These are the default URLs.
-                    create:  '/annotations',
-                    update:  '/annotations/:id',
-                    destroy: '/annotations/:id',
-                    search:  '/annotations/search'
-                },
-                annotationData : {
-                    topic_id: topic_id
-                },
-                loadFromScratch: {
-                    topic_id: topic_id
-                }
+            sel = '#topic-' + topic_id;
+
+        var annotator = Ember.$(sel).annotator({
+            //readOnly: user.id == ''
+        });
+
+        annotator.annotator('addPlugin', 'Unsupported');
+        annotator.annotator('addPlugin', 'Tags');
+        // annotator.annotator('addPlugin', 'Markdown');
+
+        annotator.annotator('addPlugin', 'Store', {
+            prefix: 'http://localhost:3000',
+            urls: {
+                // These are the default URLs.
+                create: '/annotations',
+                update: '/annotations/:id',
+                destroy: '/annotations/:id',
+                search: '/annotations/search'
+            },
+            annotationData: {
+                topic_id: topic_id,
+                'uri': window.location.pathname,
+                'comments': []
+            },
+            loadFromScratch: {
+                topic_id: topic_id
             }
-        );
+        });
+
+        // annotator.annotator('addPlugin', 'Permissions', {
+        //   user: user,
+        //   permissions: {
+        //     'read': [],
+        //     'update': [user.id],
+        //     'delete': [user.id],
+        //     'admin': [user.id]
+        //   },
+        //   showViewPermissionsCheckbox: false,
+        //   showEditPermissionsCheckbox: false,
+        //   userId: function (user) {
+        //     if (user && user.id) {
+        //       return user.id;
+        //     }
+        //
+        //     return user;
+        //   },
+        //   userString: function (user) {
+        //     if (user && user.name) {
+        //       return user.name;
+        //     }
+        //
+        //     return user;
+        //   }
+        // });
+
+        annotator.annotator('addPlugin', 'Discourse', {
+            // userId: user.id
+        });
     }
 });
