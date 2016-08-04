@@ -9,7 +9,6 @@ export default Ember.Component.extend({
     didInsertElement: function() {
         var topic_id = this.topic.id,
             sel = '#topic-'+topic_id;
-        console.log('selector='+sel);
         Ember.$(sel).annotator().annotator('addPlugin',
             'Store', {
                 // prefix: 'http://annotateit.org/api',
@@ -19,7 +18,6 @@ export default Ember.Component.extend({
                     create:  '/annotations',
                     update:  '/annotations/:id',
                     destroy: '/annotations/:id',
-                    // search:  '/search'
                     search:  '/annotations/search'
                 },
                 annotationData : {
