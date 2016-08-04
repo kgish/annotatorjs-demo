@@ -29,7 +29,6 @@ export default Ember.Component.extend({
             },
             annotationData: {
                 topic_id: topic_id,
-                'uri': window.location.pathname,
                 'comments': []
             },
             loadFromScratch: {
