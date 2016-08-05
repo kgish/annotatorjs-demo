@@ -4,47 +4,47 @@ Annotator.Plugin.Discourse = (function() {
     function Discourse(annotator, options) {
         this.annotator = annotator;
         this.options = options;
-        console.log('Plugin.Discourse()');
+        // console.log('Plugin.Discourse()');
     }
 
     Discourse.prototype.pluginInit = function() {
-        console.log('Plugin.Discourse.pluginInit()');
+        // console.log('Plugin.Discourse.pluginInit()');
 
         // annotationsLoaded(annotations)
         // called when annotations are loaded into the DOM. Provides an array of all annotations.
         this.annotator.subscribe('annotationsLoaded', function (annotations) {
-            console.log('annotationsLoaded', annotations);
+            // console.log('annotationsLoaded', annotations);
         });
 
         // beforeAnnotationCreated(annotation)
         // called immediately before an annotation is created. If you need to modify the annotation before
         // it is saved to the server by the Store plugin, use this event.
         this.annotator.subscribe('beforeAnnotationCreated', function (annotation) {
-            console.log('beforeAnnotationCreated', annotation);
+            // console.log('beforeAnnotationCreated', annotation);
         });
 
         // annotationCreated(annotation)
         // called when the annotation is created. Used by the Store plugin to save new annotations.
         this.annotator.subscribe('annotationCreated', function (annotation) {
-            console.log('annotationCreated', annotation);
+            // console.log('annotationCreated', annotation);
         });
 
         // beforeAnnotationUpdated(annotation)
         // as above, but just before an existing annotation is saved.
         this.annotator.subscribe('beforeAnnotationUpdated', function (annotation) {
-            console.log('beforeAnnotationUpdated', annotation);
+            // console.log('beforeAnnotationUpdated', annotation);
         });
 
         // annotationUpdated(annotation)
         // as above, but for an existing annotation which has just been edited.
         this.annotator.subscribe('annotationUpdated', function (annotation) {
-            console.log('annotationUpdated', annotation);
+            // console.log('annotationUpdated', annotation);
         });
 
         // annotationDeleted(annotation)
         // called when the user deletes an annotation.
         this.annotator.subscribe('annotationDeleted', function (annotation) {
-            console.log('annotationDeleted', annotation);
+            // console.log('annotationDeleted', annotation);
         });
 
         // annotationEditorShown(editor, annotation)
