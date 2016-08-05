@@ -51,31 +51,31 @@ Annotator.Plugin.Discourse = (function() {
         // called when the annotation editor is presented to the user. Allows a plugin to add extra form
         // fields. See the Tags plugin for an example of its use.
         this.annotator.subscribe('annotationEditorShown', function (editor, annotation) {
-            console.log('annotationEditorShown', editor, annotation);
+            // console.log('annotationEditorShown', editor, annotation);
         });
 
         // annotationEditorHidden(editor)
         // called when the annotation editor is hidden, both when submitted and when editing is cancelled.
         this.annotator.subscribe('annotationEditorHidden', function (editor) {
-            console.log('annotationEditorHidden', editor);
+            // console.log('annotationEditorHidden', editor);
         });
 
         // annotationEditorSubmit(editor, annotation)
         // called when the annotation editor is submitted.
         this.annotator.subscribe('annotationEditorSubmit', function (editor, annotation) {
-            console.log('annotationEditorSubmit', editor, annotation);
+            // console.log('annotationEditorSubmit', editor, annotation);
         });
 
         // annotationViewerShown(viewer, annotations)
         // called when the annotation viewer is displayed provides the annotations being displayed
         this.annotator.subscribe('annotationViewerShown', function (viewer, annotations) {
-            console.log('annotationViewerShown', viewer, annotations);
+            // console.log('annotationViewerShown', viewer, annotations);
         });
 
         // annotationViewerTextField(field, annotation)
         // called when the text field displaying the annotation in the viewer is created
         this.annotator.subscribe('annotationViewerTextField', function (field, annotation) {
-            console.log('annotationViewerTextField', field, annotation);
+            // console.log('annotationViewerTextField', field, annotation);
         });
     };
 

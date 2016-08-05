@@ -36,31 +36,31 @@ export default Ember.Component.extend({
             }
         });
 
-        // annotator.annotator('addPlugin', 'Permissions', {
-        //   user: user,
-        //   permissions: {
-        //     'read': [],
-        //     'update': [user.id],
-        //     'delete': [user.id],
-        //     'admin': [user.id]
-        //   },
-        //   showViewPermissionsCheckbox: false,
-        //   showEditPermissionsCheckbox: false,
-        //   userId: function (user) {
-        //     if (user && user.id) {
-        //       return user.id;
-        //     }
-        //
-        //     return user;
-        //   },
-        //   userString: function (user) {
-        //     if (user && user.name) {
-        //       return user.name;
-        //     }
-        //
-        //     return user;
-        //   }
-        // });
+        annotator.annotator('addPlugin', 'Permissions', {
+          user: { id: 1, name: 'kiffin' },
+          permissions: {
+            'read': [1],
+            'update': [1],
+            'delete': [1],
+            'admin': [1]
+          },
+          showViewPermissionsCheckbox: false,
+          showEditPermissionsCheckbox: false,
+          userId: function (user) {
+            if (user && user.id) {
+              return user.id;
+            }
+
+            return user;
+          },
+          userString: function (user) {
+            if (user && user.name) {
+              return user.name;
+            }
+
+            return user;
+          }
+        });
 
         annotator.annotator('addPlugin', 'Discourse', {
             // userId: user.id
