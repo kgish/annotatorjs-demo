@@ -28,6 +28,17 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+
+    // See: https://github.com/rwjblue/ember-cli-content-security-policy
+    ENV.contentSecurityPolicy = {
+        'default-src': "'none'",
+        'script-src': "'self' 'unsafe-eval' http://*:3000",
+        'font-src': "'self'",
+        'connect-src': "'self' 'unsafe-eval' http://*:3000",
+        'img-src': "'self'",
+        'style-src': "'self' 'unsafe-inline'",
+        'media-src': "'self'"
+    };
   }
 
   if (environment === 'test') {
