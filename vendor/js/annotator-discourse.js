@@ -39,7 +39,7 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
     });
 
     this.annotator.subscribe('commentCreated', function (comment) {
-      comment = $('<div class="existing-comment"><blockquote>' + comment.text + '<div class="comment-author">' + comment.user.display_name + '</div></blockquote></div>');
+      comment = $('<div class="existing-comment"><blockquote>' + comment.text + '<div class="comment-author">' + comment.user.name + '</div></blockquote></div>');
       var currentComments = $('#current-comments');
       currentComments.append(comment);
       currentComments.removeClass('hidden');
@@ -210,7 +210,7 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
 
     /*jslint unparam: true*/
     $.each(annotation.comments, function (index, comment) {
-      comment = $('<div class="existing-comment"><blockquote>' + comment.text + '<div class="comment-author">' + comment.user.display_name + '</div></blockquote></div>');
+      comment = $('<div class="existing-comment"><blockquote>' + comment.text + '<div class="comment-author">' + comment.user.name + '</div></blockquote></div>');
       currentComments.append(comment);
     });
     /*jslint unparam: false*/
@@ -282,7 +282,7 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
 
     //Add link to annotation
     var linkPath = this.options.location + '#' + annotation.link;
-    var annotationLink = $('<a></a>').attr('href', linkPath).text('Permalink').addClass('annotation-permalink');
+    var annotationLink = $('<a></a>').attr('href', linkPath).text('Permanent link to this note').addClass('annotation-permalink');
     var noteLink = $('<div class="annotation-link"></div>');
 
     annotationLink.append(noteLink);
@@ -291,7 +291,6 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
   createComment: function (textElement, annotation) {
     var user = this.options.user;
     var prefix = this.options.prefix;
-    var topic = this.options.topic;
     var text = textElement.val();
     textElement.val('');
 
@@ -301,7 +300,7 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
     };
 
     //POST request to add user's comment
-    $.post(prefix + 'topics/' + topic.id + '/annotations/' + annotation.id + '/comments', {
+    $.post(prefix + '/annotations/' + annotation.id + '/comments', {
       comment: comment
     }, function () {
       annotation.comments.push(comment);
@@ -311,8 +310,12 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
   },
   addLike: function (annotation, element) {
     var prefix = this.options.prefix;
-    var topic = this.options.topic;
-    $.post(prefix + '/topics/' + topic.id + '/annotations/' + annotation.id + '/likes', function (data) {
+    var user = this.options.user;
+    var like = { user: user };
+
+    $.post(prefix + '/annotations/' + annotation.id + '/likes', {
+        like: like
+    }, function (data) {
       element = $(element);
       element.children('.action-count').text(data.likes);
       element.siblings('span').removeClass('selected');
@@ -333,22 +336,27 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
   },
   addFlag: function (annotation, element) {
     var prefix = this.options.prefix;
-    $.post(prefix + '/annotations/' + annotation.id + '/flags', function (data) {
-      element = $(element);
-      element.children('.action-count').text(data.flags);
-      element.siblings('span').removeClass('selected');
+    var user = this.options.user;
+    var flag = { user: user };
 
-      if (data.action) {
-        element.addClass('selected');
-      } else {
-        element.removeClass('selected');
-      }
+    $.post(prefix + '/annotations/' + annotation.id + '/flags', {
+        flag: flag
+    }, function (data) {
+        element = $(element);
+        element.children('.action-count').text(data.flags);
+        element.siblings('span').removeClass('selected');
 
-      element.siblings('.thumbs-up').children('.action-count').text(data.likes);
+        if (data.action) {
+            element.addClass('selected');
+        } else {
+            element.removeClass('selected');
+        }
 
-      annotation.likes = data.likes;
-      annotation.flags = data.flags;
-      annotation.user_action = 'flag';
+        element.siblings('.thumbs-up').children('.action-count').text(data.likes);
+
+        annotation.likes = data.likes;
+        annotation.flags = data.flags;
+        annotation.user_action = 'flag';
     });
   }
 });
