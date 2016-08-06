@@ -63,7 +63,22 @@ export default Ember.Component.extend({
         });
 
         annotator.annotator('addPlugin', 'Discourse', {
-            // userId: user.id
+            annotationService: {
+                setAnnotations: function(annotations) {
+                    console.log('annotationsService.setAnnotations() annotations=', annotations);
+                },
+                broadcastSet: function() {
+                    console.log('annotationsService.broadcastSet()');
+                },
+                addAnnotation: function(annotation) {
+                    console.log('annotationsService.addAnnotation() annotation=', annotation);
+                }
+            },
+            discussionClosed: false,
+            location: window.location.href,
+            user: { id: 1, name: 'kiffin' },
+            topic: this.topic,
+            prefix: 'http://localhost:3000'
         });
     }
 });
