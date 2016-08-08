@@ -37,12 +37,12 @@ export default Ember.Component.extend({
         });
 
         annotator.annotator('addPlugin', 'Permissions', {
-          user: { id: 1, name: 'kiffin' },
+          user: { id: 11, name: 'kiffin' },
           permissions: {
-            'read': [1],
-            'update': [1],
-            'delete': [1],
-            'admin': [1]
+            'read': [11],
+            'update': [11],
+            'delete': [11],
+            'admin': [11]
           },
           showViewPermissionsCheckbox: false,
           showEditPermissionsCheckbox: false,
@@ -76,7 +76,7 @@ export default Ember.Component.extend({
             },
             discussionClosed: false,
             location: window.location.href,
-            user: { id: 1, name: 'kiffin' },
+            user: { id: 11, name: 'kiffin' },
             topic: this.topic,
             prefix: 'http://localhost:3000'
         });
