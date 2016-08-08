@@ -28,8 +28,7 @@ export default Ember.Component.extend({
                 search: '/annotations/search'
             },
             annotationData: {
-                topic_id: topic_id,
-                'comments': []
+                topic_id: topic_id
             },
             loadFromScratch: {
                 topic_id: topic_id

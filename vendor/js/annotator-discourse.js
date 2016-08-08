@@ -226,7 +226,7 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
     if (user && user.id !== undefined) {
       var annotationComments = $('<div class="annotation-comments"></div>');
       var commentText = $('<input type="text" class="form-control" />');
-      var commentSubmit = $('<button type="button" class="btn btn-primary" >Submit</button>');
+      var commentSubmit = $('<button class="btn btn-sm btn-primary">Submit</button>');
       commentSubmit.click(function () {
         this.createComment(commentText, annotation);
       }.bind(this));
@@ -246,12 +246,12 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
     var annotationAction = $('<div></div>').addClass('activity-actions');
     var generalAction = $('<span></span>').data('annotation-id', annotation.id);
 
-    var annotationLike = generalAction.clone().addClass('thumbs-up').append('<span>Yes: </span><span class="action-count">' + annotation.likes + '</span>');
-    var annotationFlag = generalAction.clone().addClass('flag').append('<span>Flags: </span><span class="action-count">' + annotation.flags + '</span>');
+    var annotationLike = generalAction.clone().addClass('thumbs-up').append('<button class="btn btn-sm btn-success">+</button>&nbsp;<span class="action-count">' + annotation.likes + '</span>');
+    var annotationFlag = generalAction.clone().addClass('flag').append('<button class="btn btn-sm btn-danger">-</button>&nbsp;<span class="action-count">' + annotation.flags + '</span>');
 
     annotationAction.append(
         annotationLike,
-        $('<span> - </span>'),
+        $('<span> &nbsp; </span>'),
         annotationFlag
     );
 
@@ -313,7 +313,7 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
     var user = this.options.user;
     var like = { user: user };
 
-    $.post(prefix + '/annotations/' + annotation.id + '/likes', {
+    $.post(prefix + '/annotations/' + annotation.id + '/like', {
         like: like
     }, function (data) {
       element = $(element);
@@ -339,7 +339,7 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
     var user = this.options.user;
     var flag = { user: user };
 
-    $.post(prefix + '/annotations/' + annotation.id + '/flags', {
+    $.post(prefix + '/annotations/' + annotation.id + '/flag', {
         flag: flag
     }, function (data) {
         element = $(element);
