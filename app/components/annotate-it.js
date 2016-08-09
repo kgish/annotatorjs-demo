@@ -67,8 +67,9 @@ export default Ember.Component.extend({
                     //console.log('annotationsService.setAnnotations() annotations=', annotations);
                     var top = $('#topic-' + topic_id + '-annotations');
                     annotations.forEach(function(annotation){
+                        var position_top = 140 + $('#annotation_'+annotation.id).position().top;
                         top.append(
-                            '<div id="annotation-' + annotation.id + '">' +
+                            '<div id="annotation-' + annotation.id + '" style="position:absolute">' +
                                 '<span class="label label-default annotation-comments">' + annotation.comments.length + '</span> ' +
                                 '<span class="label label-success annotation-likes">' + annotation.likes + '</span> ' +
                                 '<span class="label label-danger annotation-flags">' + annotation.flags + '</span> ' +
@@ -76,11 +77,13 @@ export default Ember.Component.extend({
                                 '<span class="annotation-created">' + moment(annotation.created).fromNow() + '</span> ' +
                            '</div>'
                        );
+                       $('#annotation-' + annotation.id).animate({top: position_top + 'px'});
                     });
                 },
                 addAnnotation: function(annotation) {
                     //console.log('annotationsService.addAnnotation() annotation=', annotation);
                     var top = $('#topic-' + topic_id + '-annotations');
+                    var position_top = 140 + $('#annotation_'+annotation.id).position().top;
                     top.append(
                         '<div id="annotation-' + annotation.id + '">' +
                             '<span class="label label-default annotation-comments">' + 0 + '</span> ' +
@@ -90,6 +93,7 @@ export default Ember.Component.extend({
                             '<span class="annotation-created">' + moment(annotation.created).fromNow() + '</span> ' +
                         '</div>'
                     );
+                    $('#annotation-' + annotation.id).animate({top: position_top + 'px'});
                 },
                 updateAnnotation: function(annotation) {
                     //console.log('annotationsService.updateAnnotation() annotation=', annotation);
