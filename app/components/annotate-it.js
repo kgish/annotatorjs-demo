@@ -69,9 +69,9 @@ export default Ember.Component.extend({
                     annotations.forEach(function(annotation){
                         top.append(
                             '<div id="annotation-' + annotation.id + '">' +
-                                '<span class="label label-default">' + annotation.comments.length + '</span> ' +
-                                '<span class="label label-success">' + annotation.likes + '</span> ' +
-                                '<span class="label label-danger">' + annotation.flags + '</span> ' +
+                                '<span class="label label-default annotation-comments">' + annotation.comments.length + '</span> ' +
+                                '<span class="label label-success annotation-likes">' + annotation.likes + '</span> ' +
+                                '<span class="label label-danger annotation-flags">' + annotation.flags + '</span> ' +
                                 '<span class="annotation-user-name">' + annotation.user.name + '</span> | ' +
                                 '<span class="annotation-created">' + moment(annotation.created).fromNow() + '</span> ' +
                            '</div>'
@@ -83,16 +83,24 @@ export default Ember.Component.extend({
                     var top = $('#topic-' + topic_id + '-annotations');
                     top.append(
                         '<div id="annotation-' + annotation.id + '">' +
-                        '<span class="label label-default">' + 0 + '</span> ' +
-                        '<span class="label label-success">' + 0 + '</span> ' +
-                        '<span class="label label-danger">' + 0 + '</span> ' +
-                        '<span class="annotation-user-name">' + annotation.user.name + '</span> | ' +
-                        '<span class="annotation-created">' + moment(annotation.created).fromNow() + '</span> ' +
+                            '<span class="label label-default annotation-comments">' + 0 + '</span> ' +
+                            '<span class="label label-success annotation-likes">' + 0 + '</span> ' +
+                            '<span class="label label-danger annotation-flags">' + 0 + '</span> ' +
+                            '<span class="annotation-user-name">' + annotation.user.name + '</span> | ' +
+                            '<span class="annotation-created">' + moment(annotation.created).fromNow() + '</span> ' +
                         '</div>'
                     );
                 },
                 updateAnnotation: function(annotation) {
-                    console.log('annotationsService.updateAnnotation() annotation=', annotation);
+                    //console.log('annotationsService.updateAnnotation() annotation=', annotation);
+                    var top = $('#topic-' + topic_id + '-annotations');
+                    var annotation_div = top.find('#annotation-' + annotation.id);
+
+                    annotation_div.find('.annotation-comments').text(annotation.comments.length);
+                    annotation_div.find('.annotation-likes').text(annotation.likes);
+                    annotation_div.find('.annotation-flags').text(annotation.flags);
+                    annotation_div.find('.annotation-user-name').text(annotation.user.name);
+                    annotation_div.find('.annotation-created').text(moment(annotation.created).fromNow());
                 },
                 deleteAnnotation: function(annotation) {
                     //console.log('annotationsService.deleteAnnotation() annotation=', annotation);

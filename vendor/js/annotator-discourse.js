@@ -200,8 +200,10 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
   addComments: function (field, annotation) {
     var user = this.options.user;
 
+    var ncomments = annotation.comments.length;
+
     //Add comment wrapper and collapse the comment thread
-    var commentsHeader = $('<div class="comment-toggle" data-toggle-"collapse" data-target="#current-comments">Comments <span id="comment-caret" class="caret caret-right"></span></button>').click(function () {
+    var commentsHeader = $('<div class="comment-toggle" data-toggle-"collapse" data-target="#current-comments">' + ncomments + ' Comment' + (ncomments===1?'':'s') +  '<span id="comment-caret" class="caret caret-right"></span></button>').click(function () {
       $('#current-comments').collapse('toggle');
       $('#comment-caret').toggleClass('caret-right');
     });
@@ -216,7 +218,7 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
 
     /*jslint unparam: true*/
     $.each(annotation.comments, function (index, comment) {
-      comment = $('<div class="existing-comment"><blockquote>' + comment.text + '<div class="comment-author">' + comment.user.name + '</div></blockquote></div>');
+      comment = $('<div class="existing-comment"><blockquote>' + comment.text.replace(/\n/g, "<br/>") + '<div class="comment-author">' + comment.user.name + '</div></blockquote></div>');
       currentComments.append(comment);
     });
     /*jslint unparam: false*/
@@ -231,7 +233,8 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
     //If the user is logged in, allow them to comment
     if (user && user.id !== undefined) {
       var annotationComments = $('<div class="annotation-comments"></div>');
-      var commentText = $('<input type="text" class="form-control" />');
+      // var commentText = $('<input type="text" class="form-control" />');
+      var commentText = $('<textarea class="form-control" rows="5"></textarea>');
       var commentSubmit = $('<button class="btn btn-sm btn-primary">Submit</button>');
       commentSubmit.click(function () {
         this.createComment(commentText, annotation);
@@ -308,9 +311,10 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
     //POST request to add user's comment
     $.post(prefix + '/annotations/' + annotation.id + '/comments', {
       comment: comment
-    }, function () {
+    }, function (data) {
       annotation.comments.push(comment);
 
+      this.annotator.publish('annotationUpdated', data);
       return this.annotator.publish('commentCreated', comment);
     }.bind(this));
   },
@@ -338,7 +342,9 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
       annotation.likes = data.likes;
       annotation.flags = data.flags;
       annotation.user_action = 'like';
-    });
+
+      return this.annotator.publish('annotationUpdated', data);
+    }.bind(this));
   },
   addFlag: function (annotation, element) {
     var prefix = this.options.prefix;
@@ -363,6 +369,8 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
         annotation.likes = data.likes;
         annotation.flags = data.flags;
         annotation.user_action = 'flag';
-    });
+
+        return this.annotator.publish('annotationUpdated', data);
+    }.bind(this));
   }
 });
