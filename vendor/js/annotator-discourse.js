@@ -50,6 +50,9 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
       currentComments.append(comment);
       currentComments.removeClass('hidden');
 
+      var ncomments = currentComments.children().length;
+      $('#comments-header').text(ncomments + ' Comment' + (ncomments===1?'':'s'));
+
       currentComments.collapse(true);
     });
 
@@ -203,7 +206,7 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
     var ncomments = annotation.comments.length;
 
     //Add comment wrapper and collapse the comment thread
-    var commentsHeader = $('<div class="comment-toggle" data-toggle-"collapse" data-target="#current-comments">' + ncomments + ' Comment' + (ncomments===1?'':'s') +  '<span id="comment-caret" class="caret caret-right"></span></button>').click(function () {
+    var commentsHeader = $('<div id="comments-header" class="comment-toggle" data-toggle-"collapse" data-target="#current-comments">' + ncomments + ' Comment' + (ncomments===1?'':'s') + '<span id="comment-caret" class="caret caret-right"></span></button>').click(function () {
       $('#current-comments').collapse('toggle');
       $('#comment-caret').toggleClass('caret-right');
     });
