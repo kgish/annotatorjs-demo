@@ -313,7 +313,7 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
     var user = this.options.user;
     var like = { user: user };
 
-    $.post(prefix + '/annotations/' + annotation.id + '/like', {
+    $.post(prefix + '/annotations/' + annotation.id + '/likes', {
         like: like
     }, function (data) {
       element = $(element);
@@ -339,7 +339,7 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
     var user = this.options.user;
     var flag = { user: user };
 
-    $.post(prefix + '/annotations/' + annotation.id + '/flag', {
+    $.post(prefix + '/annotations/' + annotation.id + '/flags', {
         flag: flag
     }, function (data) {
         element = $(element);
