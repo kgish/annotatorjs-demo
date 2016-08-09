@@ -64,13 +64,44 @@ export default Ember.Component.extend({
         annotator.annotator('addPlugin', 'Discourse', {
             annotationService: {
                 setAnnotations: function(annotations) {
-                    console.log('annotationsService.setAnnotations() annotations=', annotations);
-                },
-                broadcastSet: function() {
-                    console.log('annotationsService.broadcastSet()');
+                    //console.log('annotationsService.setAnnotations() annotations=', annotations);
+                    var top = $('#topic-' + topic_id + '-annotations');
+                    annotations.forEach(function(annotation){
+                        top.append(
+                            '<div id="annotation-' + annotation.id + '">' +
+                                '<span class="label label-default">' + annotation.comments.length + '</span> ' +
+                                '<span class="label label-success">' + annotation.likes + '</span> ' +
+                                '<span class="label label-danger">' + annotation.flags + '</span> ' +
+                                '<span class="annotation-user-name">' + annotation.user.name + '</span> | ' +
+                                '<span class="annotation-created">' + moment(annotation.created).fromNow() + '</span> ' +
+                           '</div>'
+                       );
+                    });
                 },
                 addAnnotation: function(annotation) {
-                    console.log('annotationsService.addAnnotation() annotation=', annotation);
+                    //console.log('annotationsService.addAnnotation() annotation=', annotation);
+                    var top = $('#topic-' + topic_id + '-annotations');
+                    top.append(
+                        '<div id="annotation-' + annotation.id + '">' +
+                        '<span class="label label-default">' + 0 + '</span> ' +
+                        '<span class="label label-success">' + 0 + '</span> ' +
+                        '<span class="label label-danger">' + 0 + '</span> ' +
+                        '<span class="annotation-user-name">' + annotation.user.name + '</span> | ' +
+                        '<span class="annotation-created">' + moment(annotation.created).fromNow() + '</span> ' +
+                        '</div>'
+                    );
+                },
+                updateAnnotation: function(annotation) {
+                    console.log('annotationsService.updateAnnotation() annotation=', annotation);
+                },
+                deleteAnnotation: function(annotation) {
+                    //console.log('annotationsService.deleteAnnotation() annotation=', annotation);
+                    var top = $('#topic-' + topic_id + '-annotations');
+                    var annotation_div = top.find('#annotation-' + annotation.id);
+                    if (annotation_div.length) { annotation_div.remove(); }
+                },
+                broadcastSet: function() {
+                    //console.log('annotationsService.broadcastSet()');
                 }
             },
             discussionClosed: false,

@@ -1,17 +1,26 @@
-<h2>Topic # {{model.id}}</h2>
-<p class="lead"><strong>{{model.title}}</strong><br /> - <small>{{model.author}}</small></p>
-
 <div class="row">
-    <div id="topic-{{model.id}}" class="col-sm-6">
-        {{#each paragraphs as |paragraph|}}
-            <p>{{paragraph}}</p>
-        {{/each}}
-        {{annotate-it topic=model}}
+    <div class="col-sm-6">
+        <h2>Topic # {{model.id}}</h2>
+        <p class="lead"><strong>{{model.title}}</strong><br /> - <small>{{model.author}}</small></p>
+
+        <div id="topic-{{model.id}}">
+            {{#each paragraphs as |paragraph|}}
+                <p>{{paragraph}}</p>
+            {{/each}}
+            {{annotate-it topic=model}}
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <h2>&nbsp;</h2>
+        <p class="lead"><strong>&nbsp;</strong><br /><small>&nbsp;</small></p>
+
+        <div id="topic-{{model.id}}-annotations">
+        </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-sm-6">
-        {{#link-to 'topics'}}Topics{{/link-to}}
+        {{#link-to 'topics'}}Back to topics{{/link-to}}
     </div>
 </div>

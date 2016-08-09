@@ -37,6 +37,12 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
     this.annotator.subscribe('annotationCreated', function (annotation) {
       annotationService.addAnnotation(annotation);
     });
+    this.annotator.subscribe('annotationUpdated', function (annotation) {
+      annotationService.updateAnnotation(annotation);
+    });
+    this.annotator.subscribe('annotationDeleted', function (annotation) {
+      annotationService.deleteAnnotation(annotation);
+    });
 
     this.annotator.subscribe('commentCreated', function (comment) {
       comment = $('<div class="existing-comment"><blockquote>' + comment.text + '<div class="comment-author">' + comment.user.name + '</div></blockquote></div>');
