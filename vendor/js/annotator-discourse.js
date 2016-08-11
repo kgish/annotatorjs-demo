@@ -171,15 +171,18 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
 
     var annotateButton = $('<button type="button" class="btn btn-default active">Annotate</button>').click(function () {
       $(this).addClass('active');
-      $(this).siblings().each(function (sibling) {
+      $(this).siblings().each(function (/*sibling*/) {
         $(this).removeClass('active');
       });
-      $('#annotator-field-0').val('');
-      $('#annotator-field-1').val('');
-      $('#explanation').toggle(false);
-      $('#explanation').prop('required', false);
+      var af0 = $('#annotator-field-0'),
+          af1 = $('#annotator-field-1'),
+          expl = $('#explanation');
+      af0.val('');
+      af1.val('');
+      expl.toggle(false);
+      expl.prop('required', false);
       $('#annotator-error').text('').toggle(false);
-      $('#annotator-field-0').focus();
+      af0.focus();
     });
 
     var editButton = $('<button type="button" class="btn btn-default">Edit</button>').click(function () {
@@ -187,11 +190,14 @@ $.extend(Annotator.Plugin.Discourse.prototype, new Annotator.Plugin(), {
       $(this).siblings().each(function (sibling) {
         $(this).removeClass('active');
       });
-      $('#annotator-field-0').val(annotation.quote);
-      $('#annotator-field-1').val('edit ');
-      $('#explanation').toggle(true);
-      $('#explanation').prop('required', true);
-      $('#annotator-field-0').focus();
+      var af0 = $('#annotator-field-0'),
+          af1 = $('#annotator-field-1'),
+          expl = $('#explanation');
+      af0.val(annotation.quote);
+      af1.val('edit ');
+      expl.toggle(true);
+      expl.prop('required', true);
+      af0.focus();
     });
 
     buttonGroup.append(annotateButton, editButton);
