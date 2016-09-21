@@ -30,7 +30,7 @@ export default Ember.Component.extend({
                 }
                 var annotations = wrapper.find($('.annotator-hl'));
                 if (annotations.length === 0) {
-                    console.error("ajaxComplete() => cannot any annotations!");
+                    console.error("ajaxComplete() => cannot find any annotations!");
                     return;
                 }
                 annotations.each(function(index, a){
